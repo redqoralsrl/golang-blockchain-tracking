@@ -1,0 +1,15 @@
+version: "2"
+sql:
+    - engine: "postgresql"
+      queries:
+        - "./internal/database/sql/query.sql"
+      schema: "./init.sql"
+      gen:
+          go:
+              package: "gen"                              # Go 패키지 이름
+              sql_package: "database/sql"                 # 데이터베이스 패키지
+              out: "./internal/database/gen"   # 생성된 코드의 출력 위치
+              emit_interface: true                        # 인터페이스 생성 여부
+              emit_json_tags: true                        # JSON 태그 포함 여부
+              emit_result_struct_pointers: true           # 결과 구조체를 포인터로 반환할지 여부
+              emit_prepared_queries: true                 # 준비된 쿼리 사용 여부

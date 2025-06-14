@@ -1,0 +1,39 @@
+# cmd 위치여서 밖에 파일 변경여부 감지 필요
+root = ".."
+# 빌드된 실행파일이 들어갈 임시 디렉토리
+tmp_dir = "tmp"
+
+[build]
+  args_bin = []
+  bin = "./cmd/main"
+  cmd = "go build -o ./cmd/main ."
+  delay = 500
+  exclude_dir = ["tmp", "vendor", "data"]
+  exclude_regex = ["_test.go"]
+  exclude_unchanged = false
+  follow_symlink = false
+  include_ext = ["go", "tpl", "tmpl", "html"]
+  log = "build-errors.log"
+  rerun = false
+  rerun_delay = 500
+  send_interrupt = false
+  stop_on_error = false
+
+[color]
+  app = "brightgreen"
+  build = "yellow"
+  main = "magenta"
+  runner = "green"
+  watcher = "cyan"
+
+[log]
+  main_only = false
+  silent = false
+  time = true
+
+[misc]
+  clean_on_exit = true
+
+[screen]
+  clear_on_rebuild = false
+  keep_scroll = true

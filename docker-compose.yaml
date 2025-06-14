@@ -1,0 +1,42 @@
+services:
+  db:
+    container_name: db
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_LOGGING: "on" # 로깅 활성화 개발용
+    volumes:
+      - ./data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    deploy:
+      resources:
+        limits:
+          cpus: "2" # 50% CPU (0.5 vCPU)
+          memory: "2G" # 최대 1.5GB 메모리
+        reservations:
+          cpus: "0.5" # 최소 25% CPU (0.25 vCPU)
+          memory: "1G" # 최소 512MB 메모리
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "10"
+    ports:
+      - "5432:5432"
+    command: ## 에러나면 삭제 / 병목 현상 분석용
+      - postgres
+      - -c
+      - "shared_preload_libraries=pg_stat_statements" # pg_stat_statements 활성화
+      - -c
+      - "pg_stat_statements.track=all" # 모든 쿼리 추적
+      - -c
+      - "pg_stat_statements.max=10000" # 최대 10,000개 쿼리 기록
+      - -c
+      - "pg_stat_statements.track_utility=on" # 유틸리티 명령도 추적
+      - -c
+      - "statement_timeout=100000" # statement_timeout 설정
+      - -c
+      - "idle_in_transaction_session_timeout=100000" # idle_in_transaction_session_timeout 설정
