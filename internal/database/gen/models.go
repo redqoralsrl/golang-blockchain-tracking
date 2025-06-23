@@ -64,6 +64,7 @@ type Erc1155 struct {
 	ChainID  string         `json:"chain_id"`
 	Hash     string         `json:"hash"`
 	TokenID  string         `json:"token_id"`
+	Url      sql.NullString `json:"url"`
 	ImageUrl sql.NullString `json:"image_url"`
 }
 
@@ -122,6 +123,7 @@ type Erc721 struct {
 	ChainID  string         `json:"chain_id"`
 	Hash     string         `json:"hash"`
 	TokenID  string         `json:"token_id"`
+	Url      sql.NullString `json:"url"`
 	ImageUrl sql.NullString `json:"image_url"`
 }
 

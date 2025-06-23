@@ -121,7 +121,7 @@ ON CONFLICT (chain_id, hash, token_id)
 DO NOTHING;
 
 -- name: CreateErc1155 :exec
-INSERT INTO erc721(chain_id, hash, token_id)
+INSERT INTO erc1155(chain_id, hash, token_id)
 VALUES ($1, $2, $3)
     ON CONFLICT (chain_id, hash, token_id)
 DO NOTHING;

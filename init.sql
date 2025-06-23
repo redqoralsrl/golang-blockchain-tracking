@@ -212,6 +212,7 @@ create table erc721
     chain_id  numeric      not null,
     hash      varchar(255) not null,
     token_id  numeric      not null,
+    url text,
     image_url text,
     unique (chain_id, hash, token_id)
 );
@@ -222,6 +223,7 @@ create table erc1155
     chain_id  numeric      not null,
     hash      varchar(255) not null,
     token_id  numeric      not null,
+    url text,
     image_url text,
     unique (chain_id, hash, token_id)
 );
